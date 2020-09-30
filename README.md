@@ -71,6 +71,22 @@ generate(__dirname, 'firestore.rules', function() {
 });
 ```
 
+``` ejs
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /things/{id} {
+      allow read: if true;
+      allow create: if <%= doc('thing').create() %>;
+      allow update: if <%= doc('thing').update() %>;
+    }
+
+  }
+}
+```
+
 ``` bash
 $ node ./examples/generate.js
 firestore.rules.ejs → firestore.rules
@@ -78,6 +94,9 @@ firestore.rules.ejs → firestore.rules
 
 ``` firestore.rules
 // firestore.rules
+
+// ...
+
 allow create: if
   request.resource.data.keys().toSet().hasOnly([
       "_token",
