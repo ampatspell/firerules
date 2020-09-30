@@ -72,7 +72,13 @@ generate(__dirname, 'firestore.rules', function() {
 
 ```
 allow create: if
-  request.resource.data.keys().toSet().hasOnly([ "_token", "type", "book", "bookmark", "fallback" ]) &&
+  request.resource.data.keys().toSet().hasOnly([
+      "_token",
+      "type",
+      "book",
+      "bookmark",
+      "fallback"
+  ]) &&
   (
     !("_token" in request.resource.data.keys()) ||
     request.resource.data._token is string
@@ -104,7 +110,13 @@ allow create: if
   );
 
 allow update: if
-  request.resource.data.diff(resource.data).affectedKeys().hasOnly([ "_token", "book", "size", "bookmark", "fallback" ]) &&
+  request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+    "_token",
+    "book",
+    "size",
+    "bookmark",
+    "fallback"
+  ]) &&
   (
     !("_token" in request.resource.data.keys()) ||
     request.resource.data._token is string
@@ -112,13 +124,19 @@ allow update: if
   (
     (
       request.resource.data.type == "book" &&
-      !request.resource.data.diff(resource.data).affectedKeys().hasAny([ "bookmark", "fallback" ]) &&
+      !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+        "bookmark",
+        "fallback"
+      ]) &&
       (
         request.resource.data.book is string &&
         (
           (
             resource.data.size is map &&
-            request.resource.data.size.diff(resource.data.size).affectedKeys().hasOnly([ "width", "height" ])
+            request.resource.data.size.diff(resource.data.size).affectedKeys().hasOnly([
+              "width",
+              "height"
+            ])
           ) ||
           request.resource.data.size.keys().toSet().hasOnly([ "width", "height" ])
         ) &&
@@ -128,13 +146,21 @@ allow update: if
     ) ||
     (
       request.resource.data.type == "bookmark" &&
-      !request.resource.data.diff(resource.data).affectedKeys().hasAny([ "book", "size", "fallback" ]) &&
+      !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+        "book",
+        "size",
+        "fallback"
+      ]) &&
       (
         request.resource.data.bookmark is string
       )
     ) ||
     (
-      !request.resource.data.diff(resource.data).affectedKeys().hasAny([ "book", "size", "bookmark" ]) &&
+      !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+        "book",
+        "size",
+        "bookmark"
+      ]) &&
       (
         request.resource.data.fallback is string
       )
