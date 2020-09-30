@@ -92,6 +92,8 @@ $ node ./examples/generate.js
 firestore.rules.ejs → firestore.rules
 ```
 
+generates:
+
 ``` firestore.rules
 // firestore.rules
 
