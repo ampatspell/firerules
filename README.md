@@ -6,7 +6,7 @@ Firestore rules javascript DSL and generator.
 
 ``` bash
 $ node ./examples/dsl.js # dsl-only
-$ node ./examples/ejs.js # full example
+$ node ./examples/generate.js # full example (dsl & ejs)
 ```
 
 ## Sample
