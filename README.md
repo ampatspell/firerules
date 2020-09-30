@@ -12,6 +12,7 @@ $ node ./examples/generate.js # full example (dsl & ejs)
 ## Sample
 
 ``` javascript
+// firestore.js
 const { generate } = require('firerules');
 
 generate(__dirname, 'firestore.rules', function() {
@@ -70,7 +71,13 @@ generate(__dirname, 'firestore.rules', function() {
 });
 ```
 
+``` bash
+$ node ./examples/generate.js
+firestore.rules.ejs → firestore.rules
 ```
+
+``` firestore.rules
+// firestore.rules
 allow create: if
   request.resource.data.keys().toSet().hasOnly([
       "_token",
