@@ -56,14 +56,14 @@ const dir = arg => require('util').inspect(arg, { depth: 25 });
 console.log();
 
 {
-  let hash = root.build('create');
+  let hash = root.build('create', 1);
   console.log(hash.string);
 }
 
 console.log();
 
 {
-  let hash = root.build('update');
+  let hash = root.build('update', 1);
   console.log(hash.string);
 }
 
