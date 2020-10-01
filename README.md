@@ -79,8 +79,8 @@ service cloud.firestore {
 
     match /things/{id} {
       allow read: if true;
-      allow create: if <%= doc('thing').create() %>;
-      allow update: if <%= doc('thing').update() %>;
+      allow create: if <%= doc('thing').create(4) %>;
+      allow update: if <%= doc('thing').update(4) %>;
     }
 
   }
