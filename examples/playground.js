@@ -2,19 +2,22 @@ const { define } = require('../lib/dsl');
 
 let root = define(function() {
 
-  // this.map('error').writable().define(function() {
-  //   this.prop('name').type('string').writable();
-  // });
+  this.prop('type').values([ 'book' ]).writable();
 
-  // this.create(function() {
-  //   this.map('error').define(function() {
-  //     this.prop('name').type().optional().nullable();
-  //   });
-  // });
+  this.if(this.eq('type', 'book'), function() {
 
-  // this.update(function() {
-  //   this.map('error').type().nullable().optional().writable();
-  // });
+    this.create(function() {
+      this.rule('isSignedIn()');
+    });
+
+    this.update(function() {
+      this.rule('isOwner(uid)');
+    });
+
+    this.prop('name').type('string').writable();
+
+  });
+
 
 });
 
