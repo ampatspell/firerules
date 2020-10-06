@@ -1,20 +1,18 @@
-const { define } = require('../lib/dsl');
+const { define, helper } = require('../lib/dsl');
+
+helper.block('type', function(values) {
+  return this.prop('type').type('string').values(values).writable();
+});
 
 let root = define(function() {
 
-  this.prop('type').values([ 'book' ]).writable();
+  this.type([ 'render' ]);
 
-  this.if(this.eq('type', 'book'), function() {
+  this.if(this.eq('type', 'render'), function() {
 
-    this.create(function() {
-      this.rule('isSignedIn()');
+    this.map('request').writable().define(function() {
+      this.type([ 'pdf', 'image' ]).writable();
     });
-
-    this.update(function() {
-      this.rule('isOwner(uid)');
-    });
-
-    this.prop('name').type('string').writable();
 
   });
 
@@ -27,6 +25,7 @@ console.log();
 
 {
   let hash = root.build('create', 1);
+  // console.log(dir(hash.merged));
   // console.log(dir(hash.writable));
   // console.log();
   console.log(hash.string);
