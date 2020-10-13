@@ -3,6 +3,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // v<%= version %>
+
     match /things/{id} {
       allow read: if true;
       allow create: if <%= doc('thing').create(4) %>;

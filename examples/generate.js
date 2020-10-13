@@ -2,6 +2,8 @@ const { generate } = require('../lib');
 
 generate(__dirname, 'firestore.rules', function() {
 
+  this.set('version', require('../package.json').version);
+
   this.helper.block('token', function() {
     return this.prop('_token').type('string').optional().writable();
   });
