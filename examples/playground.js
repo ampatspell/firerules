@@ -6,16 +6,17 @@ helper.block('type', function(values) {
 
 let root = define(function() {
 
-  this.type([ 'render' ]);
+  this.prop('name').type('string');
 
-  this.if(this.eq('type', 'render'), function() {
-
-    this.map('request').writable().define(function() {
-      this.type([ 'pdf', 'image' ]).writable();
-    });
-
+  this.create(function() {
+    this.prop('name').optional().writable();
   });
 
+  this.update(function() {
+    this.if(this.affected('name'), function() {
+      this.prop('name').value('pending').optional().writable();
+    });
+  });
 
 });
 
