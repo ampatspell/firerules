@@ -2,8 +2,6 @@
 
 Firestore rules javascript DSL and generator.
 
-> Proof of concept. Minor API changes might happen soon.
-
 ``` bash
 $ node ./examples/dsl.js # dsl-only
 $ node ./examples/generate.js # full example (dsl & ejs)
