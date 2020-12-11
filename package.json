@@ -1,6 +1,6 @@
 {
   "name": "firerules",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Firestore security rules generator",
   "main": "lib/index.js",
   "scripts": {
